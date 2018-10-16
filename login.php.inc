@@ -20,7 +20,7 @@ public function validateLogin($username,$password)
 {
 	$un = $this->logindb->real_escape_string($username);
 	$pw = $this->logindb->real_escape_string($password);
-	$statement = "select * from users where username = '$un'";
+	$statement = "select * from RegisteredUsers where username = '$un'";
 	$response = $this->logindb->query($statement);
 
 	while ($row = $response->fetch_assoc())
@@ -40,8 +40,9 @@ public function addUser($email,$username,$password)
     $em = $this->logindb->real_escape_string($email);
     $un = $this->logindb->real_escape_string($username);
 	$pw = $this->logindb->real_escape_string($password);
-	$statement = "INSERT INTO users VALUES ('$un','$pw')";
+	$statement = "INSERT INTO RegisteredUsers VALUES ('$em', '$un','$pw')";
     $this->logindb->query($statement);
+    echo "user added".PHP_EOL;
     return 1;
 
 }
