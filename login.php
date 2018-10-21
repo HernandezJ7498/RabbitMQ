@@ -21,6 +21,12 @@ switch ($request["type"])
         $request2['password'] = $_POST['pword'];//$argv[2];
         $request2['message'] = "HI";
         $response = $client->send_request($request2);
+        if($response == 1){  
+            session_start();
+            $_SESSION = array();
+            $_SESSION['username'] = $_POST['uname'];
+        }
+       
         //$response = $client->publish($request);
 
         //echo "client received response: ".PHP_EOL;
