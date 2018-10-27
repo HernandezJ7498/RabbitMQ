@@ -30,7 +30,8 @@ function requestProcessor($request)
   switch ($request['type'])
   {
     case "login"://RETURNS 1 IF THE USERS MATCH
-        return doLogin($request['username'],$request['password']);
+        $returnnumber=doLogin($request['username'],$request['password']);
+          return $returnnumber;
     case "validate_session":
         return doValidate($request['sessionId']);
       case "register":
@@ -40,7 +41,6 @@ function requestProcessor($request)
 }
 
 $server = new rabbitMQServer("testRabbitMQ.ini","testServer");
-
 $server->process_requests('requestProcessor');
 exit();
 ?>

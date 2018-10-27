@@ -25,6 +25,7 @@ switch ($request["type"])
             session_start();
             $_SESSION = array();
             $_SESSION['username'] = $_POST['uname'];
+            //header("location:Homepage.php?username=444");
         }
        
         //$response = $client->publish($request);

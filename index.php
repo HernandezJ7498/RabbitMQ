@@ -27,7 +27,7 @@ function SendLoginRequest()
 }
 function gotopage(canthey,heshere){
     if(canthey == "1"){
-       document.location.href = "Homepage.php";
+       window.location = "Homepage.php?username="+heshere;
     }
     else{
        //document.getElementById("textResponse").innerHTML = "response: Wrong password<p>";

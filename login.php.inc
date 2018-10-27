@@ -1,5 +1,4 @@
 <?php
-
 class loginDB
 {
 private $logindb;
@@ -15,7 +14,15 @@ public function __construct()
 	}
 	echo "correctly connected to database".PHP_EOL;
 }
-
+public function test(){
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, "https://pokeapi.co/api/v2/pokemon/23/");
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 4);
+    $data = curl_exec($ch);
+    curl_close($ch);
+    return $data;
+}
 public function validateLogin($username,$password)
 {
 	$un = $this->logindb->real_escape_string($username);
