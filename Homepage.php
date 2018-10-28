@@ -26,9 +26,9 @@ if(isset($_GET['hello'])){
 function HandleLoginResponse(response)
 {
 	//document.getElementById('check').innerHTML = "here";
-    //alert("hey");
     var data = JSON.parse(response);
     console.log(data);
+   document.getElementById("stats").textContent = " ";
     document.getElementById('name').innerHTML = data.species.name;
     for (i=0; i< data.stats.length; i++){
 		stats = data.stats[i].stat.name + ": " + data.stats[i].base_stat + " ";

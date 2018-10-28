@@ -5,7 +5,7 @@ private $logindb;
 
 public function __construct()
 {
-	$this->logindb = new mysqli("127.0.0.1","test","4321Password.","test");
+	$this->logindb = new mysqli("127.0.0.1","test","4321Password.","PokemonDatabase");
 
 	if ($this->logindb->connect_errno != 0)
 	{
@@ -14,9 +14,10 @@ public function __construct()
 	}
 	echo "correctly connected to database".PHP_EOL;
 }
-public function test(){
+public function test($pokename){
+    $apiurl = "https://pokeapi.co/api/v2/pokemon/".$pokename."/";
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, "https://pokeapi.co/api/v2/pokemon/23/");
+    curl_setopt($ch, CURLOPT_URL, $apiurl);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 4);
     $data = curl_exec($ch);

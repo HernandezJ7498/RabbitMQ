@@ -4,12 +4,12 @@ require_once('path.inc');
 require_once('get_host_info.inc');
 require_once('rabbitMQLib.inc');
 require_once('login.php.inc');
-function dotest()
+function dotest($thename)
 {
     // lookup username in databas
     // check password
     $testing = new loginDB();
-    return $testing->test();
+    return $testing->test($thename);
     //return false if not valid
 }
 function requestProcessor2($request)
@@ -23,14 +23,18 @@ function requestProcessor2($request)
   switch ($request['type'])
   {
       case "searchpoke":
-          return dotest();
-          //$listo = array();
-          //$listo = json_decode($hey,true);
-          //for($i = 0; $i<count($listo);$i++){
-            //  echo $listo[$i];
-          //}
-          //return dotest();//doadd($request['email'],$request['username'],$request['password']);
-          //return 
+          $temp = dotest($request['pokemonname']);
+          $thestuff2 = json_decode($temp,true);
+          $statarray[] = $thestuff2['name'];
+          $statarray[] = $thestuff2['id'];
+          foreach($thestuff2['stats'] as $names){
+              $statarray[] = $names['base_stat'];
+          }
+          foreach($statarray as $stato){
+              echo $stato;
+          }
+          return $thestuff2;
+        break;
   }
   return array("returnCode" => '0', 'message'=>"Server received request and processed");
 }

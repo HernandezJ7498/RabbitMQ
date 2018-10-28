@@ -19,10 +19,10 @@ switch ($request["type"])
         $searchRequest = array();
         $searchRequest['type'] = "searchpoke";
         $searchRequest['pokemonname'] = $_POST["pname"];
-        $registerRequest['message'] = "HIIIII";
+        //$registerRequest['message'] = "HIIIII";
         $response = $searchClient->send_request($searchRequest);
     break;
 }
-echo $response;
+echo json_encode($response);
 exit(0);
 ?>
