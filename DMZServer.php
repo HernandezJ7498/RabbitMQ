@@ -4,13 +4,11 @@ require_once('path.inc');
 require_once('get_host_info.inc');
 require_once('rabbitMQLib.inc');
 require_once('login.php.inc');
-function dotest($thename)
+function SearchDatabase($PokemonName)
 {
-    // lookup username in databas
-    // check password
-    $testing = new loginDB();
-    return $testing->test($thename);
-    //return false if not valid
+
+    $SearchLogin = new loginDB();
+    return $SearchLogin->SearchDatabase($PokemonName);
 }
 function requestProcessor2($request)
 {
@@ -23,7 +21,7 @@ function requestProcessor2($request)
   switch ($request['type'])
   {
       case "searchpoke":
-          $temp = dotest($request['pokemonname']);
+          $temp = SearchDatabase($request['pokemonname']);
           $thestuff2 = json_decode($temp,true);
           return $thestuff2;
         break;

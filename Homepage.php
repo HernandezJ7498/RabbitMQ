@@ -14,7 +14,7 @@ function logout(){
     }
     session_destroy();
 }
-if(isset($_GET['hello'])){
+if(isset($_GET['Loggedout'])){
     logout();
     header("location:index.php");
 }
@@ -24,13 +24,14 @@ if(isset($_GET['hello'])){
     <meta charset="UTF-8" />
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="./styles.css">
+    <link rel="stylesheet" type="text/css" href="./style.css">
 </head>
-<body>
+<body bgcolor='#f96e5b'>
     <script>
 function HandleLoginResponse(response)
 {
     //document.getElementById('check').innerHTML = "here";
-    var data = JSON.parse(response);
+   /* var data = JSON.parse(response);
     console.log(data);
    document.getElementById("statos").innerHTML = "<strong>Stats:</strong><br /> ";
     document.getElementById("pokepicture").src = data.sprites.front_default;
@@ -39,7 +40,11 @@ function HandleLoginResponse(response)
         stats = data.stats[i].stat.name + ": " + data.stats[i].base_stat + "<br />";
         document.getElementById("statos").innerHTML += stats;
         //$(".stats").append(stats;
-    }
+    }*/
+}
+function HandleSearchRequest(response){
+    
+    
 }
 function SendPokemonRequest()
 {
@@ -60,7 +65,17 @@ function SendPokemonRequest()
 }
 </script>
 	<h1>POKEDEX</h1>
-    <div  style="margin-left: 39%">
+    <div id='cssmenu'>
+    <ul>
+       <li class='active'><a href='#'><span>Pokedex</span></a></li>
+       <li><a href='#'><span>+Databse</span></a></li>
+       <li><a href='#'><span>Teams</span></a></li>
+        <li><a href='#'><span>Teams</span></a></li>
+        <li><a href='#'><span>Forums</span></a></li>
+       <li class='last'><a href='Homepage.php?Loggedout=true'><span>Logout</span></a></li>
+    </ul>
+    </div>
+    <div  style="margin-left: 41%">
         <input type="text" id="pokemonname" placeholder="Input Pokemon Name">
         <button type="button" id="jstrigger" onclick="SendPokemonRequest()">Search</button>
     </div>
@@ -152,9 +167,6 @@ function SendPokemonRequest()
     <div id="curve2_right"></div>
   </div>
 </div>  
-    <a href="Homepage.php?hello=true">
-    Logout
-</a>
 </body>
 </html>
 

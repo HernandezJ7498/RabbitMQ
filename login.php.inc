@@ -14,6 +14,19 @@ public function __construct()
 	}
 	echo "correctly connected to database".PHP_EOL;
 }
+public function SearchDatabase($PokemonName){
+    $NametoSearch = $this->logindb->real_escape_string($PokemonName);
+	$statement = "SELECT * FROM Pokemons WHERE name = '$NametoSearch'";
+	$response = $this->logindb->query($statement);
+	while ($row = $response->fetch_assoc())
+	{
+		foreach($row as $temp){
+            echo $temp;
+        }
+	}
+	return 0;//no users matched username
+
+}
 public function test($pokename){
     $apiurl = "https://pokeapi.co/api/v2/pokemon/".$pokename."/";
     $ch = curl_init();
@@ -40,9 +53,9 @@ public function test($pokename){
     $T8 = $this->logindb->real_escape_string($ArrayofStats[8]);
     $statement = "INSERT INTO Pokemons VALUES ('$T0','$T1','$T2','$T3','$T4','$T5','$T6','$T7','$T8')";
     $this->logindb->query($statement);
-    for($i = 0;$i<count($ArrayofStats);$i++){
+    /*for($i = 0;$i<count($ArrayofStats);$i++){
        echo $ArrayofStats[$i]." ".$i.PHP_EOL;
-    }
+    }*/
     /*foreach($ArrayofStats as $InsertArray){
         echo $InsertArray.PHP_EOL;
     }*/
