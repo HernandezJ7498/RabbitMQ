@@ -20,9 +20,33 @@ public function test($pokename){
     curl_setopt($ch, CURLOPT_URL, $apiurl);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 4);
-    $data = curl_exec($ch);
+    $RawPokemonData = curl_exec($ch);
     curl_close($ch);
-    return $data;
+    $PokemonData = json_decode($RawPokemonData,true);
+    $ArrayofStats[] = $PokemonData['id'];
+    $ArrayofStats[] = $PokemonData['name'];
+    foreach($PokemonData['stats'] as $StatData){
+        $ArrayofStats[] = $StatData['base_stat'];
+    }
+    $ArrayofStats[] = $PokemonData['sprites']['front_default'];
+    $T0 = $this->logindb->real_escape_string($ArrayofStats[0]);
+    $T1 = $this->logindb->real_escape_string($ArrayofStats[1]);
+    $T2 = $this->logindb->real_escape_string($ArrayofStats[2]);
+    $T3 = $this->logindb->real_escape_string($ArrayofStats[3]);
+    $T4 = $this->logindb->real_escape_string($ArrayofStats[4]);
+    $T5 = $this->logindb->real_escape_string($ArrayofStats[5]);
+    $T6 = $this->logindb->real_escape_string($ArrayofStats[6]);
+    $T7 = $this->logindb->real_escape_string($ArrayofStats[7]);
+    $T8 = $this->logindb->real_escape_string($ArrayofStats[8]);
+    $statement = "INSERT INTO Pokemons VALUES ('$T0','$T1','$T2','$T3','$T4','$T5','$T6','$T7','$T8')";
+    $this->logindb->query($statement);
+    for($i = 0;$i<count($ArrayofStats);$i++){
+       echo $ArrayofStats[$i]." ".$i.PHP_EOL;
+    }
+    /*foreach($ArrayofStats as $InsertArray){
+        echo $InsertArray.PHP_EOL;
+    }*/
+    return $RawPokemonData;
 }
 public function validateLogin($username,$password)
 {

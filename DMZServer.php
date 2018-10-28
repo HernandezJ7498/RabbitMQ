@@ -25,14 +25,6 @@ function requestProcessor2($request)
       case "searchpoke":
           $temp = dotest($request['pokemonname']);
           $thestuff2 = json_decode($temp,true);
-          $statarray[] = $thestuff2['name'];
-          $statarray[] = $thestuff2['id'];
-          foreach($thestuff2['stats'] as $names){
-              $statarray[] = $names['base_stat'];
-          }
-          foreach($statarray as $stato){
-              echo $stato;
-          }
           return $thestuff2;
         break;
   }
