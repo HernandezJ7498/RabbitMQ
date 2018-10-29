@@ -18,16 +18,12 @@ public function SearchDatabase($PokemonName){
     $NametoSearch = $this->logindb->real_escape_string($PokemonName);
 	$statement = "SELECT * FROM Pokemons WHERE name = '$NametoSearch'";
 	$response = $this->logindb->query($statement);
-	while ($row = $response->fetch_assoc())
-	{
-		foreach($row as $temp){
-            echo $temp;
-        }
-	}
-	return 0;//no users matched username
+	$PokemonResults = $response->fetch_assoc();
+    return $PokemonResults;
+	//return 0;//no users matched username
 
 }
-public function test($pokename){
+public function addToDatabase($pokename){
     $apiurl = "https://pokeapi.co/api/v2/pokemon/".$pokename."/";
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $apiurl);
@@ -38,28 +34,30 @@ public function test($pokename){
     $PokemonData = json_decode($RawPokemonData,true);
     $ArrayofStats[] = $PokemonData['id'];
     $ArrayofStats[] = $PokemonData['name'];
-    foreach($PokemonData['stats'] as $StatData){
-        $ArrayofStats[] = $StatData['base_stat'];
+    if($PokemonData['id'] != ""){
+        foreach($PokemonData['stats'] as $StatData){
+            $ArrayofStats[] = $StatData['base_stat'];
+        }
+        $ArrayofStats[] = $PokemonData['sprites']['front_default'];
+        $T0 = $this->logindb->real_escape_string($ArrayofStats[0]);
+        $T1 = $this->logindb->real_escape_string($ArrayofStats[1]);
+        $T2 = $this->logindb->real_escape_string($ArrayofStats[2]);
+        $T3 = $this->logindb->real_escape_string($ArrayofStats[3]);
+        $T4 = $this->logindb->real_escape_string($ArrayofStats[4]);
+        $T5 = $this->logindb->real_escape_string($ArrayofStats[5]);
+        $T6 = $this->logindb->real_escape_string($ArrayofStats[6]);
+        $T7 = $this->logindb->real_escape_string($ArrayofStats[7]);
+        $T8 = $this->logindb->real_escape_string($ArrayofStats[8]);
+        $statement = "INSERT INTO Pokemons VALUES ('$T0','$T1','$T2','$T3','$T4','$T5','$T6','$T7','$T8')";
+        $this->logindb->query($statement);
+        echo "added";
     }
-    $ArrayofStats[] = $PokemonData['sprites']['front_default'];
-    $T0 = $this->logindb->real_escape_string($ArrayofStats[0]);
-    $T1 = $this->logindb->real_escape_string($ArrayofStats[1]);
-    $T2 = $this->logindb->real_escape_string($ArrayofStats[2]);
-    $T3 = $this->logindb->real_escape_string($ArrayofStats[3]);
-    $T4 = $this->logindb->real_escape_string($ArrayofStats[4]);
-    $T5 = $this->logindb->real_escape_string($ArrayofStats[5]);
-    $T6 = $this->logindb->real_escape_string($ArrayofStats[6]);
-    $T7 = $this->logindb->real_escape_string($ArrayofStats[7]);
-    $T8 = $this->logindb->real_escape_string($ArrayofStats[8]);
-    $statement = "INSERT INTO Pokemons VALUES ('$T0','$T1','$T2','$T3','$T4','$T5','$T6','$T7','$T8')";
-    $this->logindb->query($statement);
-    /*for($i = 0;$i<count($ArrayofStats);$i++){
-       echo $ArrayofStats[$i]." ".$i.PHP_EOL;
-    }*/
-    /*foreach($ArrayofStats as $InsertArray){
-        echo $InsertArray.PHP_EOL;
-    }*/
-    return $RawPokemonData;
+    else{
+        echo "Failed to add Pokemon check NetworkLog.txt";
+        file_put_contents("/var/www/html/Networklog.txt", "Failed to add Pokemon: Does not exist ".date("Y/m/d")." ".date("h:i:sa")."\n", FILE_APPEND | LOCK_EX);
+        return 0;
+    }
+    return 1;
 }
 public function validateLogin($username,$password)
 {

@@ -14,13 +14,19 @@ $testresponse = "";
 //echo $request["type"];
 switch ($request["type"])
 {
-        case "searchpoke":
+    case "searchpoke":
         $searchClient = new rabbitMQClient("testRabbitMQ2.ini","testServer2");
         $searchRequest = array();
         $searchRequest['type'] = "searchpoke";
         $searchRequest['pokemonname'] = $_POST["pname"];
-        //$registerRequest['message'] = "HIIIII";
         $response = $searchClient->send_request($searchRequest);
+    break;
+    case "addpoke":
+        $addClient = new rabbitMQClient("testRabbitMQ2.ini","testServer2");
+        $addRequest = array();
+        $addRequest['type'] = "addpoke";
+        $addRequest['pokemonname'] = $_POST["pname"];
+        $response = $addClient->send_request($addRequest);
     break;
 }
 echo json_encode($response);
