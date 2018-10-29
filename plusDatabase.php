@@ -1,4 +1,10 @@
 <!doctype html>
+<?php
+session_start();
+if(!isset($_SESSION['username'])){
+    header("location:index.php");
+}
+?>
 <html lang=''>
 <head>
    <meta charset='utf-8'>
@@ -13,7 +19,6 @@
 <script>
 function HandleAddResponse(response)
 {
-    //document.getElementById('check').innerHTML = "here";
    var addResults = JSON.parse(response);
     console.log(addResults);
     if(addResults == 1){
@@ -29,7 +34,7 @@ function SendAddRequest()
    
     var pokemonname = document.getElementById('addpokemonname').value;
     var request = new XMLHttpRequest();
-    request.open("POST","search.php",true);
+    request.open("POST","Search.php",true);
     request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
     request.onreadystatechange= function ()
     {
@@ -48,8 +53,8 @@ function SendAddRequest()
 <ul>
    <li><a href='Homepage.php'><span>Pokedex</span></a></li>
    <li class='active'><a href='plusDatabase.php'><span>+Databse</span></a></li>
-   <li><a href='#'><span>Teams</span></a></li>
-   <li><a href='#'><span>Teams</span></a></li>
+   <li><a href='#'><span>Build your Team</span></a></li>
+   <li><a href='#'><span>Team Suggestion</span></a></li>
    <li><a href='#'><span>Forums</span></a></li>
    <li class='last'><a href='Homepage.php?Loggedout=true'><span>Logout</span></a></li>
 </ul>

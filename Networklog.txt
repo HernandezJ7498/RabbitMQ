@@ -1,3 +1,16 @@
-
-Failed to add Pokemon: Doesn't exist 2018/10/29 12:39:51am
-Failed to add Pokemon: Doesn't exist 2018/10/29 12:40:23amFailed to add Pokemon: Doesn't exist 2018/10/29 12:50:59amFailed to add Pokemon: Does not exist 2018/10/29 12:57:27am
+Pokemon 'zoroark' not found in databse. User instructed to add2018/10/29 10:32:00am
+Pokemon 'zoroark' not found in databse. User instructed to add2018/10/29 10:33:29am
+Pokemon 'zoroark' not found in databse. User instructed to add2018/10/29 10:33:32am
+Pokemon 'machokke' not found in databse. User instructed to add2018/10/29 10:34:22am
+Pokemon 'psyduck' not found in databse. User instructed to add2018/10/29 11:00:20am
+Failed to add Pokemon: Does not exist 2018/10/29 11:00:38am
+Failed to add Pokemon: Does not exist 2018/10/29 11:14:46am
+Pokemon 'delphox' not found in databse. User instructed to add2018/10/29 11:15:00am
+Pokemon 'gumshoos' not found in databse. User instructed to add2018/10/29 11:35:42am
+Failed to add Pokemon: Does not exist 2018/10/29 11:35:56am
+Pokemon 'torkoal' not found in databse. User instructed to add2018/10/29 11:58:05am
+Failed to add Pokemon: Does not exist 2018/10/29 11:58:14am
+Pokemon 'blastoise' not found in databse. User instructed to add2018/10/29 12:06:42pm
+Pokemon 'natu' not found in databse. User instructed to add2018/10/29 12:12:35pm
+Failed to add Pokemon: Does not exist 2018/10/29 12:12:42pm
+Pokemon 'natu' not found in databse. User instructed to add2018/10/29 12:12:48pm

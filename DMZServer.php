@@ -3,7 +3,7 @@
 require_once('path.inc');
 require_once('get_host_info.inc');
 require_once('rabbitMQLib.inc');
-require_once('login.php.inc');
+require_once('RequestProcessor.php.inc');
 function SearchDatabase($PokemonNamesearch)
 {
 
@@ -40,7 +40,7 @@ function requestProcessor2($request)
   return array("returnCode" => '0', 'message'=>"Server received request and processed");
 }
 
-$server2 = new rabbitMQServer("testRabbitMQ2.ini","testServer2");
+$server2 = new rabbitMQServer("DMZServerinitializer.ini","testServer2");
 
 $server2->process_requests('requestProcessor2');
 exit();

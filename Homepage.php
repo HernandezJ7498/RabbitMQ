@@ -30,12 +30,17 @@ if(isset($_GET['Loggedout'])){
     <script>
 function HandleSearchRequest(response){
    var SearchResults = JSON.parse(response);
-    console.log(SearchResults);
-   document.getElementById("statos").innerHTML = "<strong>Stats:</strong><br /> ";
-    document.getElementById("pokepicture").src = SearchResults['Picture'];
-    document.getElementById('name').innerHTML = "<strong>Name:</strong> " + SearchResults['Name'];
-    var Stats = "Speed: " + SearchResults['Speed'] + "<br />" + "Special Defense: " + SearchResults['SpecialDefense'] + "<br />" + "Special Attack: " + SearchResults['SpecialAttack'] + "<br />" + "Defense: " + SearchResults['Defense'] + "<br />" + "Attack: " + SearchResults['Attack'] + "<br />" + "HP: " + SearchResults['HP'];
-    document.getElementById("statos").innerHTML += Stats;
+    if(response != 0){
+        console.log(SearchResults);
+        document.getElementById("statos").innerHTML = "<strong>Stats:</strong><br /> ";
+        document.getElementById("pokepicture").src = SearchResults['Picture'];
+        document.getElementById('name').innerHTML = "<strong>Name:</strong> " + SearchResults['Name'];
+        var Stats = "Speed: " + SearchResults['Speed'] + "<br />" + "Special Defense: " + SearchResults['SpecialDefense'] + "<br />" + "Special Attack: " + SearchResults['SpecialAttack'] + "<br />" + "Defense: " + SearchResults['Defense'] + "<br />" + "Attack: " + SearchResults['Attack'] + "<br />" + "HP: " + SearchResults['HP'];
+        document.getElementById("statos").innerHTML += Stats;
+    }
+    else{
+        alert("No results found, Check your spelling or Add pokemons to database int the +Database tab");
+    }
 
 }
 function SendSearchRequest()
@@ -43,7 +48,7 @@ function SendSearchRequest()
    
     var pokemonname = document.getElementById('searchpokemonname').value;
     var request = new XMLHttpRequest();
-    request.open("POST","search.php",true);
+    request.open("POST","Search.php",true);
     request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
     request.onreadystatechange= function ()
     {
@@ -56,13 +61,15 @@ function SendSearchRequest()
     request.send("type=searchpoke&pname="+pokemonname);
 }
 </script>
-	<h1>POKEDEX</h1>
+    <div style="margin-left: 41%">
+	<h1>POOR MAN'S POKEDEX</h1>
+    </div>
     <div id='cssmenu'>
     <ul>
        <li class='active'><a href='Homepage.php'><span>Pokedex</span></a></li>
        <li><a href='plusDatabase.php'><span>+Databse</span></a></li>
-       <li><a href='#'><span>Teams</span></a></li>
-        <li><a href='#'><span>Teams</span></a></li>
+       <li><a href='#'><span>Build your Team</span></a></li>
+        <li><a href='#'><span>Team Suggestions</span></a></li>
         <li><a href='#'><span>Forums</span></a></li>
        <li class='last'><a href='Homepage.php?Loggedout=true'><span>Logout</span></a></li>
     </ul>

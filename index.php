@@ -13,7 +13,7 @@ function SendLoginRequest()
 	var username1 = document.getElementById('username').value;
     var password1 = document.getElementById('password').value;
     var request = new XMLHttpRequest();
-	request.open("POST","login.php",true);
+	request.open("POST","Login.php",true);
 	request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 	request.onreadystatechange= function ()
 	{

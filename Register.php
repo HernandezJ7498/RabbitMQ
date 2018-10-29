@@ -14,7 +14,7 @@ function SendRegistrationRequest()
     var newUsername = document.getElementById('newUsername').value;
     var newPassword = document.getElementById('newPassword').value;
     var registrationRequest = new XMLHttpRequest();
-	registrationRequest.open("POST","login.php",true);
+	registrationRequest.open("POST","Login.php",true);
 	registrationRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 	registrationRequest.onreadystatechange= function ()
 	{
