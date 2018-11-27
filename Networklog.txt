@@ -1,16 +1,8 @@
-Pokemon 'zoroark' not found in databse. User instructed to add2018/10/29 10:32:00am
-Pokemon 'zoroark' not found in databse. User instructed to add2018/10/29 10:33:29am
-Pokemon 'zoroark' not found in databse. User instructed to add2018/10/29 10:33:32am
-Pokemon 'machokke' not found in databse. User instructed to add2018/10/29 10:34:22am
-Pokemon 'psyduck' not found in databse. User instructed to add2018/10/29 11:00:20am
-Failed to add Pokemon: Does not exist 2018/10/29 11:00:38am
-Failed to add Pokemon: Does not exist 2018/10/29 11:14:46am
-Pokemon 'delphox' not found in databse. User instructed to add2018/10/29 11:15:00am
-Pokemon 'gumshoos' not found in databse. User instructed to add2018/10/29 11:35:42am
-Failed to add Pokemon: Does not exist 2018/10/29 11:35:56am
-Pokemon 'torkoal' not found in databse. User instructed to add2018/10/29 11:58:05am
-Failed to add Pokemon: Does not exist 2018/10/29 11:58:14am
-Pokemon 'blastoise' not found in databse. User instructed to add2018/10/29 12:06:42pm
-Pokemon 'natu' not found in databse. User instructed to add2018/10/29 12:12:35pm
-Failed to add Pokemon: Does not exist 2018/10/29 12:12:42pm
-Pokemon 'natu' not found in databse. User instructed to add2018/10/29 12:12:48pm
+Pokemon 'snorlax' not found in databse. User instructed to add2018/11/02 10:23:39am
+Pokemon 'snorlax' not found in databse. User instructed to add2018/11/02 10:23:39am
+Pokemon 'snorlax' not found in databse. User instructed to add2018/11/02 10:23:54am
+Pokemon 'snolax' not found in databse. User instructed to add2018/11/02 10:24:06am
+Pokemon 'rayquaza' not found in databse. User instructed to add2018/11/02 01:45:17pm
+Pokemon 'rhydon' not found in databse. User instructed to add2018/11/09 10:46:47am
+Failed to add Pokemon: Does not exist 2018/11/09 10:47:06am
+Pokemon 'cyndaquils' not found in databse. User instructed to add2018/11/09 12:11:12pm

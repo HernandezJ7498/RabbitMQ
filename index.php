@@ -2,10 +2,16 @@
 <html lang="en">
 <script>
 
-function HandleLoginResponse(response,whoisit)
+function HandleLoginResponse(response,username)
 {
-	var text = JSON.parse(response);
-    gotopage(text,whoisit);
+	var loginresult = JSON.parse(response);
+    if(loginresult == "1"){
+        window.location = "Homepage.php?username="+username;
+    }
+    else{
+        alert("Username/Password is wrong");
+    }
+    //gotopage(text,whoisit);
 }
 
 function SendLoginRequest()
@@ -25,14 +31,14 @@ function SendLoginRequest()
 	}
 	request.send("type=login&uname="+username1+"&pword="+password1);
 }
-function gotopage(canthey,heshere){
+/*function gotopage(canthey,heshere){
     if(canthey == "1"){
        window.location = "Homepage.php?username="+heshere;
     }
     else{
        //document.getElementById("textResponse").innerHTML = "response: Wrong password<p>";
        }
-}
+}*/
     </script>
 <head>
 	<title>Login V3</title>
@@ -64,7 +70,7 @@ function gotopage(canthey,heshere){
 <body>
 	
 	<div class="limiter">
-		<div class="container-login100" style="background-image: url('images/league.png');">
+		<div class="container-login100" style="background-image: url('images/league.jpg');">
 			<div class="wrap-login100">
 				<!--<form class="login100-form validate-form">-->
 					<span class="login100-form-logo">

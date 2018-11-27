@@ -4,7 +4,11 @@
 
 function HandleRegistrationResponse(response)
 {
-	var text = JSON.parse(response);
+	var registrationresponse = JSON.parse(response);
+    if(registrationresponse == "1"){
+        window.location = "index.php";
+    }
+    
     //gotopage(text);
 }
 
@@ -66,7 +70,7 @@ function gotopage(canthey){
 <body>
 	
 	<div class="limiter">
-		<div class="container-login100" style="background-image: url('images/league.png');">
+		<div class="container-login100" style="background-image: url('images/league.jpg');">
 			<div class="wrap-login100">
 				<!--<form class="login100-form validate-form">-->
 
@@ -99,8 +103,8 @@ function gotopage(canthey){
 					</div>
 
 					<div class="text-center p-t-90">
-						<a class="txt1" href="index.html">
-							ALready have an account? Login.
+						<a class="txt1" href="index.php">
+							Already have an account? Login.
 						</a>
 					</div>
 				<!--</form>-->

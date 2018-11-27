@@ -1,0 +1,13 @@
+[Unit]
+Description=RunningLoginService
+After=printer.target network.target multi-user.target
+
+[Service]
+Type=simple
+WorkingDirectory=/var/www/html
+ExecStart=/var/www/html/LOGINServer.php
+Restart=on-failure
+# Other Restart options: or always, on-abort, etc
+
+[Install]
+WantedBy=multi-user.target
