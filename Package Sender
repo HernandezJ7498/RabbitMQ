@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+inotifywait -m /packages/ -e create -e moved_to |
+        while read path action file; do
+                scp $file ryan2@192.168.0.20:
+        done   
