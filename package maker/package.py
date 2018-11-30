@@ -10,6 +10,10 @@ Config.read("package.ini")
 Config.sections()
 ['frontEndPackage', 'backEndPackage', 'DMZPackage']
 
+cnx = mysql.connector.connect(user='test', password='4321Password.',
+                              host='192.168.0.11',
+                              database='deployment')
+
 def ConfigSectionMap(section):
     dict1 = {}
     options = Config.options(section)
@@ -23,100 +27,38 @@ def ConfigSectionMap(section):
             dict1[option] = None
     return dict1
 
-def install():
-    installIP = input("Enter the IP of the machine to isntall to: ")
-    selection = input("\n Enter a package name to install: ")
+print("You can make a package for:")
 
-    latestRollback = input ("Enter 1 to install latest package enter 2 to rollback: ")
-    if latestRollback == 1:
-        mycursor = cnx.cursor()
+for sections in Config.sections():
+    print(sections)
 
-        mycursor.execute("SELECT version FROM versions WHERE type='" + selection + "'")
-
-        latest = mycursor.fetchall()
-
-        versions = []
-        for version in latest:
-            versions.append(version[0])
-            print(versions)
-
-        latestVersion = max(versions)
-
-        packageName = selection + str(latestVersion) + ".tar.gz"
-
-        os.system("scp " + "linux490@" + deploymentIP + ":/packages" + selection + str(latestVersion) + ".tar.gz linux490@" + installIP + ":/packages")
-
-        os.system("ssh linux490@" + installIP + "'tar xf " + packageName + " -C /packages/unzipped/'")
-
-    if latestRollback == 2:
-        mycursor = cnx.cursor()
-
-        mycursor.execute("SELECT version FROM versions WHERE type='" + selection + "' and stable='true'")
-        latest = mycursor.fetchall()
-
-        versions = []
-        for version in latest:
-            versions.append(version[0])
-            print(versions)
-
-        latestStable = max(versions)
-
-        packageName = selection + str(latestStable) + ".tar.gz"
-
-        os.system("scp " + "linux490@" + deploymentIP + ":/packages" + selection + str(
-            latestStable) + ".tar.gz linux490@" + installIP + ":/packages")
-
-        os.system("ssh linux490@" + installIP + "'tar xf " + packageName + " -C /packages/unzipped/'")
+selection = input("\n Enter a package name to build: ")
+directory = input("Enter your working directory e.g /home/directory/: \n")
 
 
+mycursor = cnx.cursor()
 
-def build():
-    print("You can make a package for:")
-    for sections in Config.sections():
-        print(sections)
+mycursor.execute("SELECT version FROM versions WHERE type='" + selection + "'")
 
-    selection = input("\n Enter a package name to build: ")
-    directory = input("Enter your working directory e.g /home/directory/ (NOTE: USE TRAILING SLASH: \n")
+latest = mycursor.fetchall()
 
-    mycursor = cnx.cursor()
+versions=[]
+for version in latest:
+    versions.append(version[0])
+    print(versions)
 
-    mycursor.execute("SELECT version FROM versions WHERE type='" + selection + "'")
+prevVersion = max(versions)
 
-    latest = mycursor.fetchall()
+newVersion = prevVersion + 1
 
-    versions=[]
-    for version in latest:
-        versions.append(version[0])
-        print(versions)
+sql = "INSERT INTO versions (filename, type, version) VALUES (%s, %s, %s)"
+val = (selection + str(newVersion) + ".tar.gz", selection, newVersion)
+mycursor.execute(sql, val)
+cnx.commit()
 
-    prevVersion = max(versions)
+tar = tarfile.open(selection + str(newVersion) + ".tar.gz", "w:gz")
+for files in ConfigSectionMap(selection):
+    tar.add(files)
+tar.close()
 
-    newVersion = prevVersion + 1
-
-    sql = "INSERT INTO versions (filename, type, version) VALUES (%s, %s, %s)"
-    val = (selection + str(newVersion) + ".tar.gz", selection, newVersion)
-    mycursor.execute(sql, val)
-    cnx.commit()
-
-    packageName = selection + str(newVersion) + ".tar.gz"
-
-    tar = tarfile.open(packageName, "w:gz")
-    for files in ConfigSectionMap(selection):
-        tar.add(directory + files)
-    tar.close()
-
-    os.system("scp " + selection + str(newVersion) + ".tar.gz linux490@" + deploymentIP + ":/packages")
-
-deploymentIP = input("Enter the IP of the deployment server (default is 192.168.0.11): ")
-if deploymentIP == "":
-    deploymentIP = "192.68.0.11"
-
-cnx = mysql.connector.connect(user='test', password='4321Password.',
-                              host=deploymentIP,
-                              database='deployment')
-
-buildInstall = input("Enter 1 for build and 2 for install?: ")
-if buildInstall == "1":
-    build()
-if buildInstall == "2":
-    install()
+os.system("scp " + selection + str(newVersion) + ".tar.gz linux490@192.168.0.11:/home")
