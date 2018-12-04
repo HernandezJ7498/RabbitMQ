@@ -5,6 +5,13 @@ require_once('get_host_info.inc');
 require_once('rabbitMQLib.inc');
 require_once('RequestProcessor.php.inc');
 
+function SearchDatabase($PokemonNamesearch)
+{
+
+    $SearchLogin = new loginDB();
+    return $SearchLogin->SearchDatabase($PokemonNamesearch);
+}
+
 function doLogin($username,$password)
 {
     // lookup username in databas
@@ -29,6 +36,19 @@ function requestProcessor($request)
   }
   switch ($request['type'])
   {
+    case "searchpoke":
+          $SearchResults = SearchDatabase($request['pokemonname']);
+          //$thestuff2 = json_decode($temp,true);
+	  if ($SearchResults == false){
+		$addClient = new rabbitMQClient("DMZServerinitializer.ini","testServer2");
+		$addRequest = array();
+		$addRequest['type'] = "addpoke";
+		$addRequest['pokemonname'] = $request['pokemonname'];
+		$response = $addClient->send_request($addRequest);
+	  }
+	  else{
+          	return $SearchResults;
+	  }    
     case "login"://RETURNS 1 IF THE USERS MATCH
         $returnnumber=doLogin($request['username'],$request['password']);
           return $returnnumber;

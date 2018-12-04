@@ -6,3 +6,6 @@ Pokemon 'rayquaza' not found in databse. User instructed to add2018/11/02 01:45:
 Pokemon 'rhydon' not found in databse. User instructed to add2018/11/09 10:46:47am
 Failed to add Pokemon: Does not exist 2018/11/09 10:47:06am
 Pokemon 'cyndaquils' not found in databse. User instructed to add2018/11/09 12:11:12pm
+Failed to add Pokemon: Does not exist 2018/12/04 02:40:09pm
+Failed to add Pokemon: Does not exist 2018/12/04 02:40:14pm
+Failed to add Pokemon: Does not exist 2018/12/04 02:42:46pm

@@ -5,7 +5,7 @@ private $logindb;
 
 public function __construct()
 {
-	$this->logindb = new mysqli("127.0.0.1","test","4321Password.","PokemonDatabase");
+	$this->logindb = new mysqli("192.168.0.10","test","4321Password.","PokemonDatabase");
 
 	if ($this->logindb->connect_errno != 0)
 	{
@@ -21,6 +21,9 @@ public function SearchDatabase($PokemonName){
     if($response->num_rows != 0){
         $PokemonResults = $response->fetch_assoc();
         return $PokemonResults;
+    }
+    else{
+	return false;
     }
     echo "No Results: Pokemon '$NametoSearch' not in database. Check NetworkLog.txt";
     file_put_contents("/var/www/html/Networklog.txt", "Pokemon '$NametoSearch' not found in databse. User instructed to add".date("Y/m/d")." ".date("h:i:sa")."\n", FILE_APPEND | LOCK_EX);
