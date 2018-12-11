@@ -60,7 +60,24 @@ function requestProcessor($request)
   return array("returnCode" => '0', 'message'=>"Server received request and processed");
 }
 
-$server = new rabbitMQServer("LOGINServerinitializer.ini","testServer");
+class customException extends Exception {
+  public function errorMessage() {
+    //error message
+    $errorMsg = 'Error on line '.$this->getLine().' in '.$this->getFile()
+    .': <b>'.$this->getMessage().'</b> is not a valid E-Mail address';
+    return $errorMsg;
+  }
+}
+
+try {
+    $server = new rabbitMQServer("LOGINServerinitializer.ini","mainServer");
+    throw new customException();
+    }
+catch(customException $e) {
+    $server = new rabbitMQServer("LOGINServerinitializer.ini","backupServer");
+    echo "Using backup server";
+}
+
 $server->process_requests('requestProcessor');
 exit();
 ?>
