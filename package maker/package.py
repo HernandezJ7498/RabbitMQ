@@ -4,6 +4,7 @@ import tarfile
 import os
 
 Config = configparser.ConfigParser()
+Config.optionxform = str
 
 Config.read("package.ini")
 
@@ -47,7 +48,8 @@ def install():
 
         os.system("scp " + "linux490@" + deploymentIP + ":/packages/" + selection + str(latestVersion) + ".tar.gz linux490@" + installIP + ":/packages")
         os.system("ssh linux490@" + installIP + " 'tar xf /packages/" + packageName + " -C /packages/unzipped/'")
-        os.system("ssh linux490@" + installIP + " cp -a /packages/unzipped/" + selection.lower() + "/. /var/www/html")
+        #os.system("ssh linux490@" + installIP + " cp -a /packages/unzipped/" + selection.lower() + "/. /var/www/html")
+        os.system("ssh linux490@" + installIP + " cp -a /packages/unzipped/" + "/. /var/www/html")
 
     if latestRollback == "2":
         mycursor = cnx.cursor()
@@ -66,7 +68,8 @@ def install():
 
         os.system("scp " + "linux490@" + deploymentIP + ":/packages/" + packageName + " linux490@" + installIP + ":/packages")
         os.system("ssh linux490@" + installIP + " 'tar xf /packages/" + packageName + " -C /packages/unzipped/'")
-        os.system("ssh linux490@" + installIP + " cp -a /packages/unzipped/" + selection.lower() + "/. /var/www/html")
+        #os.system("ssh linux490@" + installIP + " cp -a /packages/unzipped/" + selection.lower() + "/. /var/www/html")
+        os.system("ssh linux490@" + installIP + " cp -a /packages/unzipped/" + "/. /var/www/html")
 
 def build():
     print("You can make a package for:")
@@ -74,9 +77,10 @@ def build():
         print(sections)
 
     selection = input("\n Enter a package name to build: ")
-    directory = input("Enter your working directory e.g /home/directory/ (NOTE: USE TRAILING SLASH: \n")
+    directory = input("Enter your working directory (default /var/www/html/ NOTE: USE TRAILING SLASH: \n")
+    if directory == "":
+        directory = "/var/www/html/"
     isStable = input("is stable?(y/n): ")
-
     if isStable == "y":
         stable = 1
     else:
@@ -106,14 +110,14 @@ def build():
 
     tar = tarfile.open(packageName, "w:gz")
     for files in ConfigSectionMap(selection):
-        tar.add(directory + files)
+        tar.add(directory + files, files)
     tar.close()
 
     os.system("scp " + selection + str(newVersion) + ".tar.gz linux490@" + deploymentIP + ":/packages")
 
-deploymentIP = input("Enter the IP of the deployment server (default is 192.168.0.11): ")
+deploymentIP = input("Enter the IP of the deployment server (default is 192.168.0.50): ")
 if deploymentIP == "":
-    deploymentIP = "192.68.0.11"
+    deploymentIP = "192.168.0.50"
 
 cnx = mysql.connector.connect(user='test', password='4321Password.',
                               host=deploymentIP,
