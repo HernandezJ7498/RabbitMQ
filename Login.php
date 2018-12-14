@@ -46,13 +46,13 @@ switch ($request["type"])
         $response = $registerClient->send_request($registerRequest);
     break;
     case "onetime":
-        $onetimeclient = new rabbitMQClient("LOGINServerinitializer.ini","testServer");
+        $onetimeclient = new rabbitMQClient("LOGINServerinitializer.ini","mainServer");
         $onetime = array();
         $onetime['type'] = "onetime";
         $response = $onetimeclient->send_request($onetime);
     break;
     case "load":
-        $loadclient = new rabbitMQClient("LOGINServerinitializer.ini","testServer");
+        $loadclient = new rabbitMQClient("LOGINServerinitializer.ini","mainServer");
         $load = array();
         $load['type'] = "load";
         $load['poke1'] = $_POST['poke1'];
@@ -63,7 +63,7 @@ switch ($request["type"])
         $response = $loadclient->send_request($load);
     break;
     case "listrequest":
-        $listclient = new rabbitMQClient("LOGINServerinitializer.ini","testServer");
+        $listclient = new rabbitMQClient("LOGINServerinitializer.ini","mainServer");
         $listrequest = array();
         $listrequest['type'] = "listrequest";
         $response = $listclient->send_request($listrequest);

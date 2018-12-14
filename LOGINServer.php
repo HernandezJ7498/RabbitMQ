@@ -55,7 +55,7 @@ function requestProcessor($request)
           $SearchResults = SearchDatabase($request['pokemonname']);
           //$thestuff2 = json_decode($temp,true);
 	  if ($SearchResults == false){
-		$addClient = new rabbitMQClient("DMZServerinitializer.ini","mainServer");
+		$addClient = new rabbitMQClient("DMZServerinitializer.ini","mainDMZ");
 		$addRequest = array();
 		$addRequest['type'] = "addpoke";
 		$addRequest['pokemonname'] = $request['pokemonname'];
