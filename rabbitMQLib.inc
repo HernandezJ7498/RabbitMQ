@@ -6,6 +6,7 @@ class rabbitMQServer
 {
 	private $machine = "";
 	public  $BROKER_HOST;
+	public  $BACKUP_BROKER_HOST;
 	private $BROKER_PORT;
 	private $USER;
 	private $PASSWORD;
@@ -20,6 +21,7 @@ class rabbitMQServer
 	{
 		$this->machine = getHostInfo(array($machine));
 		$this->BROKER_HOST   = $this->machine[$server]["BROKER_HOST"];
+		$this->BACKUP_BROKER_HOST   = $this->machine[$server]["BACKUP_BROKER_HOST"];
 		$this->BROKER_PORT   = $this->machine[$server]["BROKER_PORT"];
 		$this->USER     = $this->machine[$server]["USER"];
 		$this->PASSWORD = $this->machine[$server]["PASSWORD"];
@@ -139,6 +141,7 @@ class rabbitMQClient
 {
 	private $machine = "";
 	public  $BROKER_HOST;
+	public  $BACKUP_BROKER_HOST;
 	private $BROKER_PORT;
 	private $USER;
 	private $PASSWORD;
@@ -153,6 +156,7 @@ class rabbitMQClient
 	{
 		$this->machine = getHostInfo(array($machine));
 		$this->BROKER_HOST   = $this->machine[$server]["BROKER_HOST"];
+		$this->BACKUP_BROKER_HOST   = $this->machine[$server]["BACKUP_BROKER_HOST"];
 		$this->BROKER_PORT   = $this->machine[$server]["BROKER_PORT"];
 		$this->USER     = $this->machine[$server]["USER"];
 		$this->PASSWORD = $this->machine[$server]["PASSWORD"];
@@ -265,7 +269,22 @@ class rabbitMQClient
 		}
 		catch(Exception $e)
 		{
-			die("failed to send message to exchange: ". $e->getMessage()."\n");
+			$params = array();
+			$params['host'] = $this->BACKUP_BROKER_HOST;
+			$params['port'] = $this->BROKER_PORT;
+			$params['login'] = $this->USER;
+			$params['password'] = $this->PASSWORD;
+			$params['vhost'] = $this->VHOST;
+			$conn = new AMQPConnection($params);
+			$conn->connect();
+			$channel = new AMQPChannel($conn);
+			$exchange = new AMQPExchange($channel);
+			$exchange->setName($this->exchange);
+			$exchange->setType($this->exchange_type);
+			$this->conn_queue = new AMQPQueue($channel);
+			$this->conn_queue->setName($this->queue);
+			$this->conn_queue->bind($exchange->getName(),$this->routing_key);
+			return $exchange->publish($json_message,$this->routing_key);
 		}
 	}
 }
