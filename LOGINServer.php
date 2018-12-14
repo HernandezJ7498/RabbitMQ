@@ -69,14 +69,7 @@ class customException extends Exception {
   }
 }
 
-try {
-    $server = new rabbitMQServer("LOGINServerinitializer.ini","mainServer");
-    throw new customException();
-    }
-catch(customException $e) {
-    $server = new rabbitMQServer("LOGINServerinitializer.ini","backupServer");
-    echo "Using backup server";
-}
+$server = new rabbitMQServer("LOGINServerinitializer.ini","mainServer");
 
 $server->process_requests('requestProcessor');
 exit();

@@ -14,7 +14,7 @@ $response = "unsupported request type, politely FUCK OFF";
 switch ($request["type"])
 {
 	case "login":
-        $client = new rabbitMQClient("LOGINServerinitializer.ini","testServer");
+        $client = new rabbitMQClient("LOGINServerinitializer.ini","mainServer");
         $request2 = array();
         $request2['type'] = "login";
         $request2['username'] = $_POST['uname']; //$argv[1];
@@ -36,7 +36,7 @@ switch ($request["type"])
             //$response = "login, yeah we can do that";
 	   break;
     case "register":
-        $registerClient = new rabbitMQClient("LOGINServerinitializer.ini","testServer");
+        $registerClient = new rabbitMQClient("LOGINServerinitializer.ini","mainServer");
         $registerRequest = array();
         $registerRequest['type'] = "register";
         $registerRequest['email'] = $_POST['email'];

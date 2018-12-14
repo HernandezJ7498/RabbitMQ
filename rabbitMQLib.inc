@@ -129,7 +129,7 @@ class rabbitMQServer
 		}
 		catch (Exception $e)
 		{
-            throw new Exception("Failed to start request processor: ");
+            		throw new Exception("Failed to start request processor: ");
 			trigger_error("Failed to start request processor: ".$e,E_USER_ERROR); 
 		}
 	}
