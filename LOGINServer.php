@@ -60,6 +60,8 @@ function requestProcessor($request)
 		$addRequest['type'] = "addpoke";
 		$addRequest['pokemonname'] = $request['pokemonname'];
 		$response = $addClient->send_request($addRequest);
+        $SearchResults = SearchDatabase($request['pokemonname']);
+        return $SearchResults;
 	  }
 	  else{
           	return $SearchResults;
