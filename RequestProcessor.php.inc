@@ -5,12 +5,13 @@ private $logindb;
 
 public function __construct()
 {
-	$this->logindb = new mysqli("localhost","test","4321Password.","PokemonDatabase");
+	$this->logindb = new mysqli("192.168.0.10","test","4321Password.","PokemonDatabase");
 
 	if ($this->logindb->connect_errno != 0)
 	{
-		echo "Error connecting to database: ".$this->logindb->connect_error.PHP_EOL;
-		exit(1);
+		echo "using backup DB ".$this->logindb->connect_error.PHP_EOL;
+		#exit(1);
+		$this->logindb = new mysqli("192.168.0.10","test","4321Password.","PokemonDatabase");
 	}
 	echo "correctly connected to database".PHP_EOL;
 }
