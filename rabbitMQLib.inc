@@ -84,7 +84,7 @@ class rabbitMQServer
 		}
 		catch(Exception $e)
 		{
-if ($msg->getReplyTo())
+			if ($msg->getReplyTo())
 			{
 				// message wants a response
 				// process request
@@ -116,6 +116,7 @@ if ($msg->getReplyTo())
 				$exchange->publish(json_encode($response),$replykey,AMQP_NOPARAM,array('correlation_id'=>$msg->getCorrelationId()));
 
 				return;
+			}
 		}
 		// message does not require a response, send ack immediately
 		$body = $msg->getBody();
