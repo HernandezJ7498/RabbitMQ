@@ -5,7 +5,7 @@ private $logindb;
 
 public function __construct()
 {
-	$this->logindb = new mysqli("192.168.0.10","test","4321Password.","PokemonDatabase");
+	$this->logindb = new mysqli("localhost","test","4321Password.","PokemonDatabase");
 
 	if ($this->logindb->connect_errno != 0)
 	{
@@ -89,8 +89,11 @@ public function addUser($email,$username,$password)
 {
     $em = $this->logindb->real_escape_string($email);
     $un = $this->logindb->real_escape_string($username);
-	$pw = $this->logindb->real_escape_string($password);
-	$statement = "INSERT INTO RegisteredUsers VALUES ('$em', '$un','$pw')";
+    $pw = $this->logindb->real_escape_string($password);
+    echo $em;
+    echo $un;
+    echo $pw;
+    $statement = "INSERT INTO RegisteredUsers VALUES ('$em', '$un','$pw')";
     $this->logindb->query($statement);
     echo "user added".PHP_EOL;
     return 1;
