@@ -246,7 +246,8 @@ function requestProcessor($request)
                     break;
             }
         }
-        print_r($pokepictures);
+        print_r($weakagainst);
+        print_r($strongagainst);
         return array($weakagainst,$strongagainst,$pokepictures);
   }
   return array("returnCode" => '0', 'message'=>"Server received request and processed");
