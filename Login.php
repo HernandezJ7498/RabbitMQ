@@ -45,6 +45,29 @@ switch ($request["type"])
         $registerRequest['message'] = "HIIIII";
         $response = $registerClient->send_request($registerRequest);
     break;
+    case "onetime":
+        $onetimeclient = new rabbitMQClient("LOGINServerinitializer.ini","testServer");
+        $onetime = array();
+        $onetime['type'] = "onetime";
+        $response = $onetimeclient->send_request($onetime);
+    break;
+    case "load":
+        $loadclient = new rabbitMQClient("LOGINServerinitializer.ini","testServer");
+        $load = array();
+        $load['type'] = "load";
+        $load['poke1'] = $_POST['poke1'];
+        $load['poke2'] = $_POST['poke2'];
+        $load['poke3'] = $_POST['poke3'];
+        $load['poke4'] = $_POST['poke4'];
+        $load['poke5'] = $_POST['poke5'];
+        $response = $loadclient->send_request($load);
+    break;
+    case "listrequest":
+        $listclient = new rabbitMQClient("LOGINServerinitializer.ini","testServer");
+        $listrequest = array();
+        $listrequest['type'] = "listrequest";
+        $response = $listclient->send_request($listrequest);
+    break;
 }
 echo json_encode($response);
 exit(0);

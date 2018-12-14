@@ -68,7 +68,7 @@ function SendSearchRequest()
     <ul>
        <li class='active'><a href='Homepage.php'><span>Pokedex</span></a></li>
        <li><a href='plusDatabase.php'><span>+Databse</span></a></li>
-       <li><a href='#'><span>Build your Team</span></a></li>
+       <li><a href='Teams.php'><span>Build your Team</span></a></li>
         <li><a href='#'><span>Team Suggestions</span></a></li>
         <li><a href='#'><span>Forums</span></a></li>
        <li class='last'><a href='Homepage.php?Loggedout=true'><span>Logout</span></a></li>

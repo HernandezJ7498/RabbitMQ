@@ -25,6 +25,7 @@ function requestProcessor2($request)
           $addResults = addToDatabase($request['pokemonname']);
           //$thestuff2 = json_decode($temp,true);
           return $addResults;
+          
   }
   return array("returnCode" => '0', 'message'=>"Server received request and processed");
 }

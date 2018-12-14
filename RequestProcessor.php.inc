@@ -20,6 +20,7 @@ public function SearchDatabase($PokemonName){
 	$response = $this->logindb->query($statement);
     if($response->num_rows != 0){
         $PokemonResults = $response->fetch_assoc();
+        echo "found it!";
         return $PokemonResults;
     }
     else{
@@ -65,6 +66,85 @@ public function addToDatabase($pokename){
         return 0;
     }
     return 1;
+}
+public function typecheck($pokename){
+    $pokemon = $this->logindb->real_escape_string($pokename);
+	$searchstatement = "SELECT type FROM RawPokemonData WHERE name = '$pokename'";
+	$searchresponse = $this->logindb->query($searchstatement);
+    if($searchresponse->num_rows != 0){
+        $searchresults = $searchresponse->fetch_assoc();
+        echo "found it!".PHP_EOL;
+        return $searchresults;
+    }
+    return 0;
+}
+public function piccheck($thepokename){
+    $thepokemon = $this->logindb->real_escape_string($thepokename);
+	$picsearchstatement = "SELECT picture FROM RawPokemonData WHERE name = '$thepokename'";
+	$picsearchresponse = $this->logindb->query($picsearchstatement);
+    if($picsearchresponse->num_rows != 0){
+        $picsearchresults = $picsearchresponse->fetch_assoc();
+        echo "found it!".PHP_EOL;
+        return $picsearchresults;
+    }
+    return 0;
+}
+public function requestlist(){
+	$fulllist = "SELECT name,type FROM RawPokemonData";
+	$listresponse = $this->logindb->query($fulllist);
+    $fullarray = array();
+    while($row = $listresponse->fetch_assoc()){
+        array_push($fullarray,$row);
+    }
+    return $fullarray;
+}
+public function onetimeadd(){
+    $apiurl = "https://pokeapi.co/api/v2/pokemon/";
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $apiurl);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 4);
+    $RawPokemonData = curl_exec($ch);
+    curl_close($ch);
+    $PokemonData = json_decode($RawPokemonData,true);
+    $d = 0;
+   foreach($PokemonData['results'] as $pokename){
+            echo $pokename['name']." Type(s): ";
+            $thestring = $pokename['name'];
+            $apiurl2 = "https://pokeapi.co/api/v2/pokemon/".$thestring."/";
+            $ch2 = curl_init();
+            curl_setopt($ch2, CURLOPT_URL, $apiurl2);
+            curl_setopt($ch2, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch2, CURLOPT_CONNECTTIMEOUT, 4);
+            $RawPokemonData2 = curl_exec($ch2);
+            curl_close($ch2);
+            $t = 0;
+            $PokemonData2 = json_decode($RawPokemonData2,true);
+            foreach($PokemonData2['types'] as $thetypes){
+                $t = 0;
+               foreach($thetypes['type'] as $finally){
+                  echo $finally." ";
+                  break;
+               }
+               echo $PokemonData2['sprites']['front_default'];
+               $thepic = $PokemonData2['sprites']['front_default'];
+               if(++$t > 0){
+                    break;
+                }
+              
+            }
+            $one = $this->logindb->real_escape_string($thestring);
+            $two = $this->logindb->real_escape_string($finally);
+            $theactualpic = $this->logindb->real_escape_string($thepic);
+            $addstatement = "INSERT INTO RawPokemonData VALUES ('$one','$two','$theactualpic')";
+            $this->logindb->query($addstatement);
+             echo "".PHP_EOL;
+
+        if(++$d > 150){
+                break;
+        }
+    }
+    return $PokemonData;
 }
 public function validateLogin($username,$password)
 {
