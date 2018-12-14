@@ -36,7 +36,7 @@ switch ($request["type"])
             //$response = "login, yeah we can do that";
 	   break;
     case "register":
-        $registerClient = new rabbitMQClient("LOGINServerinitializer.ini","testServer");
+        $registerClient = new rabbitMQClient("LOGINServerinitializer.ini","mainServer");
         $registerRequest = array();
         $registerRequest['type'] = "register";
         $registerRequest['email'] = $_POST['email'];

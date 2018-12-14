@@ -42,6 +42,45 @@ function HandleReturnedArray(response, type){
         document.getElementById("Poke3pic").src = returnedarrays[2][2];
         document.getElementById("Poke4pic").src = returnedarrays[2][3];
         document.getElementById("Poke5pic").src = returnedarrays[2][4];
+        for(var t=0;t<18;t++){
+            if(t==0){
+               document.getElementById("normalstrong").innerhtml = returnedarrays[0][t];
+            }else if(t==1){
+                document.getElementById("fightingstrong").innerhtml = returnedarrays[0][t];
+            }else if(t==2){
+                document.getElementById("flyingstrong").innerhtml = returnedarrays[0][t];
+            }else if(t==3){
+                document.getElementById("poisonstrong").innerhtml = returnedarrays[0][t];
+            }else if(t==4){
+                document.getElementById("groundstrong").innerhtml = returnedarrays[0][t];
+            }else if(t==5){
+                document.getElementById("rockstrong").innerhtml = returnedarrays[0][t];
+            }else if(t==6){
+                document.getElementById("bugstrong").innerhtml = returnedarrays[0][t];
+            }else if(t==7){
+                document.getElementById("ghoststrong").innerhtml = returnedarrays[0][t];
+            }else if(t==8){
+                document.getElementById("steelstrong").innerhtml = returnedarrays[0][t];
+            }else if(t==9){
+                document.getElementById("firestrong").innerhtml = returnedarrays[0][t];
+            }else if(t==10){
+                document.getElementById("waterstrong").innerhtml = returnedarrays[0][t];
+            }else if(t==11){
+                document.getElementById("grassstrong").innerhtml = returnedarrays[0][t];
+            }else if(t==12){
+                document.getElementById("electricstrong").innerhtml = returnedarrays[0][t];
+            }else if(t==13){
+                document.getElementById("psychicstrong").innerhtml = returnedarrays[0][t];
+            }elsei f(t==14){
+                document.getElementById("icestrong").innerhtml = returnedarrays[0][t];
+            }else if(t==15){
+                document.getElementById("dragonstrong").innerhtml = returnedarrays[0][t];
+            }elseif(t==16){
+                document.getElementById("fairystrong").innerhtml = returnedarrays[0][t];
+            }else if(t==17){
+                document.getElementById("darkstrong").innerhtml = returnedarrays[0][t];
+            }  
+        }
         document.getElementById("yourteam").innerHTML = "YOUR TEAM";
     }
     else if(type=="loadlist"){
@@ -202,6 +241,71 @@ window.onload = pokelist;
         <img id="Poke4pic" src="" height="200" />
         <img id="Poke5pic" src="" height="200" />
     </div>
+    <table align="center">
+        <tr>
+            <th width="100px" id="normalstrong">
+                
+            </th>
+            <th width="100px" id="fightingstrong">
+                
+            </th>
+            <th width="100px" id="flyingstrong">
+                
+            </th>
+            <th width="100px" id="poisonstrong">
+                
+            </th>
+            <th width="100px" id="groundstrong">
+                
+            </th>
+            <th width="100px" id="rockstrong">
+                
+            </th>
+            <th width="100px" id="bugstrong">
+                
+            </th>
+            <th width="100px" id="ghoststrong">
+                
+            </th>
+            <th width="100px" id="steelstrong">
+                
+            </th>
+        </tr>
+        <tr>
+            <td align="center">
+                0
+            </td>
+        </tr>
+        <tr>
+            <th width="100px" id="firestrong">
+                
+            </th>
+            <th width="100px" id="waterstrong">
+                
+            </th>
+            <th width="100px" id="grassstrong">
+                
+            </th>
+            <th width="100px" id="electricstrong">
+                
+            </th>
+            <th width="100px" id="psychicstrong">
+                
+            </th>
+            <th width="100px" id="icestrong">
+                
+            </th>
+            <th width="100px" id="dragonstrong">
+                
+            </th>
+            <th width="100px" id="fairystrong">
+                
+            </th>
+            <th width="100px" id="darkstrong">
+                
+            </th>
+        </tr>
+    </table>
     <table align="center" border="1" bgcolor="#FFA07A">
         <tr>
             <th>
