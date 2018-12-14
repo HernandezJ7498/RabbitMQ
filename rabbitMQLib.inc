@@ -131,8 +131,33 @@ class rabbitMQServer
 		}
 		catch (Exception $e)
 		{
-            		throw new Exception("Failed to start request processor: ");
-			trigger_error("Failed to start request processor: ".$e,E_USER_ERROR); 
+			$this->callback = $callback;
+			$params = array();
+			$params['host'] = $this->BACKUP_BROKER_HOST;
+			$params['port'] = $this->BROKER_PORT;
+			$params['login'] = $this->USER;
+			$params['password'] = $this->PASSWORD;
+			$params['vhost'] = $this->VHOST;
+			$conn = new AMQPConnection($params);
+			$conn->connect();
+
+			$channel = new AMQPChannel($conn);
+
+			$exchange = new AMQPExchange($channel);
+			$exchange->setName($this->exchange);
+			$exchange->setType($this->exchange_type);
+
+			$this->conn_queue = new AMQPQueue($channel);
+			$this->conn_queue->setName($this->queue);
+			$this->conn_queue->bind($exchange->getName(),$this->routing_key);
+
+			$this->conn_queue->consume(array($this,'process_message'));
+
+			// Loop as long as the channel has callbacks registered
+			while (count($channel->callbacks))
+			{
+				$channel->wait();
+			} 
 		}
 	}
 }
