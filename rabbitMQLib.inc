@@ -1,5 +1,9 @@
 <?php
 
+ini_set("log_errors", 1);
+ini_set("error_log", "/log/rabbitLib.log");
+error_log("log init");
+
 require_once('get_host_info.inc');
 
 class rabbitMQServer
@@ -12,7 +16,8 @@ class rabbitMQServer
 	private $PASSWORD;
 	private $VHOST;
 	private $exchange;
-	private $queue;
+	private $backupExchange;
+	private $backupQueue;
 	private $routing_key = '*';
 	private $exchange_type = "topic";
 	private $auto_delete = false;
@@ -35,7 +40,9 @@ class rabbitMQServer
 			$this->auto_delete = $this->machine[$server]["AUTO_DELETE"];
 		}
 		$this->exchange = $this->machine[$server]["EXCHANGE"];
+		$this->backupExchange = $this->machine[$server]["BACKUP_EXCHANGE"];
 		$this->queue = $this->machine[$server]["QUEUE"];
+		$this->backupQueue = $this->machine[$server]["BACKUP_QUEUE"];
 	}
 
 	function process_message($msg)
@@ -175,11 +182,11 @@ class rabbitMQServer
 			$channel = new AMQPChannel($conn);
 
 			$exchange = new AMQPExchange($channel);
-			$exchange->setName($this->exchange);
+			$exchange->setName($this->backupExchange);
 			$exchange->setType($this->exchange_type);
 
 			$this->conn_queue = new AMQPQueue($channel);
-			$this->conn_queue->setName($this->queue);
+			$this->conn_queue->setName($this->backupQueue);
 			$this->conn_queue->bind($exchange->getName(),$this->routing_key);
 
 			$this->conn_queue->consume(array($this,'process_message'));
@@ -203,7 +210,9 @@ class rabbitMQClient
 	private $PASSWORD;
 	private $VHOST;
 	private $exchange;
+	private $backupExchange;
 	private $queue;
+	private $backupQueue;
 	private $routing_key = '*';
 	private $response_queue = array();
 	private $exchange_type = "topic";
@@ -226,7 +235,9 @@ class rabbitMQClient
 			$this->auto_delete = $this->machine[$server]["AUTO_DELETE"];
 		}
 		$this->exchange = $this->machine[$server]["EXCHANGE"];
+		$this->backupExchange = $this->machine[$server]["BACKUP_EXCHANGE"];
 		$this->queue = $this->machine[$server]["QUEUE"];
+		$this->backupQueue = $this->machine[$server]["BACKUP_QUEUE"];
 	}
 
 	function process_response($response)
@@ -303,11 +314,11 @@ class rabbitMQClient
 			$channel = new AMQPChannel($conn);
 
 			$exchange = new AMQPExchange($channel);
-			$exchange->setName($this->exchange);
+			$exchange->setName($this->backupExchange);
 			$exchange->setType($this->exchange_type);
 
 			$callback_queue = new AMQPQueue($channel);
-			$callback_queue->setName($this->queue."_response");
+			$callback_queue->setName($this->backupQueue."_response");
 			$callback_queue->declare();
 			$callback_queue->bind($exchange->getName(),$this->routing_key.".response");
 
