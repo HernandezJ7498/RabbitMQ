@@ -2,6 +2,11 @@
 require_once('path.inc');
 require_once('get_host_info.inc');
 require_once('rabbitMQLib.inc');
+
+ini_set("log_errors", 1);
+ini_set("error_log", "/log/loginphp.log");
+error_log("log init");
+
 if (!isset($_POST))
 {
 	$msg = "NO POST MESSAGE SET, POLITELY FUCK OFF";
