@@ -42,45 +42,29 @@ function HandleReturnedArray(response, type){
         document.getElementById("Poke3pic").src = returnedarrays[2][2];
         document.getElementById("Poke4pic").src = returnedarrays[2][3];
         document.getElementById("Poke5pic").src = returnedarrays[2][4];
-        for(var t=0;t<18;t++){
-            if(t==0){
-               document.getElementById("normalstrong").innerhtml = returnedarrays[0][t];
-            }else if(t==1){
-                document.getElementById("fightingstrong").innerhtml = returnedarrays[0][t];
-            }else if(t==2){
-                document.getElementById("flyingstrong").innerhtml = returnedarrays[0][t];
-            }else if(t==3){
-                document.getElementById("poisonstrong").innerhtml = returnedarrays[0][t];
-            }else if(t==4){
-                document.getElementById("groundstrong").innerhtml = returnedarrays[0][t];
-            }else if(t==5){
-                document.getElementById("rockstrong").innerhtml = returnedarrays[0][t];
-            }else if(t==6){
-                document.getElementById("bugstrong").innerhtml = returnedarrays[0][t];
-            }else if(t==7){
-                document.getElementById("ghoststrong").innerhtml = returnedarrays[0][t];
-            }else if(t==8){
-                document.getElementById("steelstrong").innerhtml = returnedarrays[0][t];
-            }else if(t==9){
-                document.getElementById("firestrong").innerhtml = returnedarrays[0][t];
-            }else if(t==10){
-                document.getElementById("waterstrong").innerhtml = returnedarrays[0][t];
-            }else if(t==11){
-                document.getElementById("grassstrong").innerhtml = returnedarrays[0][t];
-            }else if(t==12){
-                document.getElementById("electricstrong").innerhtml = returnedarrays[0][t];
-            }else if(t==13){
-                document.getElementById("psychicstrong").innerhtml = returnedarrays[0][t];
-            }elsei f(t==14){
-                document.getElementById("icestrong").innerhtml = returnedarrays[0][t];
-            }else if(t==15){
-                document.getElementById("dragonstrong").innerhtml = returnedarrays[0][t];
-            }elseif(t==16){
-                document.getElementById("fairystrong").innerhtml = returnedarrays[0][t];
-            }else if(t==17){
-                document.getElementById("darkstrong").innerhtml = returnedarrays[0][t];
-            }  
-        }
+        document.getElementById("normalstrong").innerHTML = "Normal";
+        document.getElementById("normalval").innerHTML = returnedarrays[1]['normal'];
+        document.getElementById("fightingstrong").innerHTML = "Fighting";
+        document.getElementById("fightingval").innerHTML = returnedarrays[1]['fighting'];
+        document.getElementById("flyingstrong").innerHTML = "Flying";
+        document.getElementById("flyingval").innerHTML = returnedarrays[1]['flying'];
+        document.getElementById("poisonstrong").innerHTML = "Poison";
+        document.getElementById("poisonval").innerHTML = returnedarrays[1]['poison'];
+        document.getElementById("groundstrong").innerHTML = "Ground";
+        document.getElementById("groundval").innerHTML = returnedarrays[1]['ground'];
+        document.getElementById("rockstrong").innerHTML = "Rock";
+        document.getElementById("bugstrong").innerHTML = "Bug";
+        document.getElementById("ghoststrong").innerHTML = "Ghost";
+        document.getElementById("steelstrong").innerHTML = "Steel";
+        document.getElementById("firestrong").innerHTML = "Fire";
+        document.getElementById("waterstrong").innerHTML = "Water";
+        document.getElementById("grassstrong").innerHTML = "Grass";
+        document.getElementById("electricstrong").innerHTML = "Electric";
+        document.getElementById("psychicstrong").innerHTML = "Psychic";
+        document.getElementById("icestrong").innerHTML = "Ice";
+        document.getElementById("dragonstrong").innerHTML = "Dragon";
+        document.getElementById("fairystrong").innerHTML = "Fairy";
+        document.getElementById("darkstrong").innerHTML = "Dark";
         document.getElementById("yourteam").innerHTML = "YOUR TEAM";
     }
     else if(type=="loadlist"){
@@ -272,8 +256,32 @@ window.onload = pokelist;
             </th>
         </tr>
         <tr>
-            <td align="center">
-                0
+            <td id="normalval" align="center">
+                
+            </td>
+            <td id="fightingval" align="center">
+                
+            </td>
+            <td id="flyingval" align="center">
+                
+            </td>
+            <td id="poisonval" align="center">
+                
+            </td>
+            <td id="groundval" align="center">
+                
+            </td>
+            <td id="rockval" align="center">
+                
+            </td>
+            <td id="bugvlval" align="center">
+                
+            </td>
+            <td id="ghostlval" align="center">
+                
+            </td>
+            <td id="steelval" align="center">
+                
             </td>
         </tr>
         <tr>
