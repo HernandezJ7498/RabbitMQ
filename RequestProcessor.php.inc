@@ -9,9 +9,10 @@ public function __construct()
 
 	if ($this->logindb->connect_errno != 0)
 	{
+		
 		echo "using backup DB ".$this->logindb->connect_error.PHP_EOL;
 		#exit(1);
-		$this->logindb = new mysqli("192.168.0.10","test","4321Password.","PokemonDatabase");
+		$this->logindb = new mysqli("192.168.0.20","test","4321Password.","PokemonDatabase");
 	}
 	echo "correctly connected to database".PHP_EOL;
 }
