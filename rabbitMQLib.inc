@@ -113,7 +113,7 @@ class rabbitMQServer
 				$conn->connect();
 				$channel = new AMQPChannel($conn);
 				$exchange = new AMQPExchange($channel);
-				$exchange->setName($this->exchange);
+				$exchange->setName($this->backupExchange);
 				$exchange->setType($this->exchange_type);
 
 				$conn_queue = new AMQPQueue($channel);
@@ -323,7 +323,7 @@ class rabbitMQClient
 			$callback_queue->bind($exchange->getName(),$this->routing_key.".response");
 
 			$this->conn_queue = new AMQPQueue($channel);
-			$this->conn_queue->setName($this->queue);
+			$this->conn_queue->setName($this->backupQueue);
 			$this->conn_queue->bind($exchange->getName(),$this->routing_key);
 
 			$exchange->publish($json_message,$this->routing_key,AMQP_NOPARAM,array('reply_to'=>$callback_queue->getName(),'correlation_id'=>$uid));
@@ -377,10 +377,10 @@ class rabbitMQClient
 			$conn->connect();
 			$channel = new AMQPChannel($conn);
 			$exchange = new AMQPExchange($channel);
-			$exchange->setName($this->exchange);
+			$exchange->setName($this->backupExchange);
 			$exchange->setType($this->exchange_type);
 			$this->conn_queue = new AMQPQueue($channel);
-			$this->conn_queue->setName($this->queue);
+			$this->conn_queue->setName($this->backupQueue);
 			$this->conn_queue->bind($exchange->getName(),$this->routing_key);
 			return $exchange->publish($json_message,$this->routing_key);
 		}
