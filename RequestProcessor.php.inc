@@ -32,6 +32,16 @@ public function SearchDatabase($PokemonName){
 	return 0;
 
 }
+public function getteam(){
+    $randomstatement = "SELECT * FROM Pokemons";
+    $randomresponse = $this->logindb->query($randomstatement);
+    $fullarray = array();
+    while($row = $randomresponse->fetch_assoc()){
+        array_push($fullarray,$row);
+    }
+    echo "done";
+    return $fullarray;
+}
 public function addToDatabase($pokename){
     $apiurl = "https://pokeapi.co/api/v2/pokemon/".$pokename."/";
     $ch = curl_init();

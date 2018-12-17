@@ -68,6 +68,12 @@ switch ($request["type"])
         $listrequest['type'] = "listrequest";
         $response = $listclient->send_request($listrequest);
     break;
+    case "getteam":
+        $teamclient = new rabbitMQClient("LOGINServerinitializer.ini","mainServer");
+        $teamrequest = array();
+        $teamrequest['type'] = "getteam";
+        $response = $teamclient->send_request($teamrequest);
+    break;
 }
 echo json_encode($response);
 exit(0);

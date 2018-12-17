@@ -25,6 +25,11 @@ function doadd($email,$username,$password)
     $userCreation = new loginDB();
     return $userCreation->addUser($email,$username,$password);
 }
+function getteam()
+{
+    $teamholder = new loginDB();
+    return $teamholder->getteam();
+}
 function onetimeadd(){
     $onetime = new loginDB();
     return $onetime->onetimeadd();
@@ -77,6 +82,22 @@ function requestProcessor($request)
           return onetimeadd();
     case "listrequest":
           return listrequest();
+    case "getteam":
+          $PokemonList = getteam();
+          $DatabaseCount = count($PokemonList);
+          $Pick5Array = array();
+          $RandomNums = array();
+          while(count($RandomNums) < 5){
+              $rand = rand(0,$DatabaseCount);
+              if(!in_array($rand, $RandomNums)){
+                  array_push($RandomNums, $rand);
+              }
+              
+          }
+          foreach($RandomNums as $Number){
+              array_push($Pick5Array,$PokemonList[$Number]);
+          }
+          return $Pick5Array;
     case "load":
        $strongagainst = array("normal"=>0,"fighting"=>0,"flying"=>0,"poison"=>0,"ground"=>0,"rock"=>0,"bug"=>0,"ghost"=>0,"steel"=>0,"fire"=>0,"water"=>0,"grass"=>0,"electric"=>0,"psychic"=>0,"ice"=>0,"dragon"=>0,"fairy"=>0,"dark"=>0);
         $weakagainst = array("normal"=>0,"fighting"=>0,"flying"=>0,"poison"=>0,"ground"=>0,"rock"=>0,"bug"=>0,"ghost"=>0,"steel"=>0,"fire"=>0,"water"=>0,"grass"=>0,"electric"=>0,"psychic"=>0,"ice"=>0,"dragon"=>0,"fairy"=>0,"dark"=>0);

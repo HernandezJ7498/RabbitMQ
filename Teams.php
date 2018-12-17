@@ -53,19 +53,77 @@ function HandleReturnedArray(response, type){
         document.getElementById("groundstrong").innerHTML = "Ground";
         document.getElementById("groundval").innerHTML = returnedarrays[1]['ground'];
         document.getElementById("rockstrong").innerHTML = "Rock";
+        document.getElementById("rockval").innerHTML = returnedarrays[1]['rock'];
         document.getElementById("bugstrong").innerHTML = "Bug";
+        document.getElementById("bugval").innerHTML = returnedarrays[1]['bug'];
         document.getElementById("ghoststrong").innerHTML = "Ghost";
+        document.getElementById("ghostval").innerHTML = returnedarrays[1]['ghost'];
         document.getElementById("steelstrong").innerHTML = "Steel";
+        document.getElementById("steelval").innerHTML = returnedarrays[1]['steel'];
         document.getElementById("firestrong").innerHTML = "Fire";
+        document.getElementById("fireval").innerHTML = returnedarrays[1]['fire'];
         document.getElementById("waterstrong").innerHTML = "Water";
+        document.getElementById("waterval").innerHTML = returnedarrays[1]['water'];
         document.getElementById("grassstrong").innerHTML = "Grass";
+        document.getElementById("grassval").innerHTML = returnedarrays[1]['grass'];
         document.getElementById("electricstrong").innerHTML = "Electric";
+        document.getElementById("electricval").innerHTML = returnedarrays[1]['electric'];
         document.getElementById("psychicstrong").innerHTML = "Psychic";
+        document.getElementById("psychicval").innerHTML = returnedarrays[1]['psychic'];
         document.getElementById("icestrong").innerHTML = "Ice";
+        document.getElementById("iceval").innerHTML = returnedarrays[1]['ice'];
         document.getElementById("dragonstrong").innerHTML = "Dragon";
+        document.getElementById("dragonval").innerHTML = returnedarrays[1]['dragon'];
         document.getElementById("fairystrong").innerHTML = "Fairy";
+        document.getElementById("fairyval").innerHTML = returnedarrays[1]['fairy'];
         document.getElementById("darkstrong").innerHTML = "Dark";
+        document.getElementById("darkval").innerHTML = returnedarrays[1]['dark'];
         document.getElementById("yourteam").innerHTML = "YOUR TEAM";
+        document.getElementById("StrongAgainst").innerHTML = "Strong Against";
+        document.getElementById("WeakAgainst").innerHTML = "Weak Against";
+        
+        document.getElementById("normalweak").innerHTML = "Normal";
+        document.getElementById("normalval1").innerHTML = returnedarrays[0]['normal'];
+        document.getElementById("fightingweak").innerHTML = "Fighting";
+        document.getElementById("fightingval1").innerHTML = returnedarrays[0]['fighting'];
+        document.getElementById("flyingweak").innerHTML = "Flying";
+        document.getElementById("flyingval1").innerHTML = returnedarrays[0]['flying'];
+        document.getElementById("poisonweak").innerHTML = "Poison";
+        document.getElementById("poisonval1").innerHTML = returnedarrays[0]['poison'];
+        document.getElementById("groundweak").innerHTML = "Ground";
+        document.getElementById("groundval1").innerHTML = returnedarrays[0]['ground'];
+        document.getElementById("rockweak").innerHTML = "Rock";
+        document.getElementById("rockval1").innerHTML = returnedarrays[0]['rock'];
+        document.getElementById("bugweak").innerHTML = "Bug";
+        document.getElementById("bugval1").innerHTML = returnedarrays[0]['bug'];
+        document.getElementById("ghostweak").innerHTML = "Ghost";
+        document.getElementById("ghostval1").innerHTML = returnedarrays[0]['ghost'];
+        document.getElementById("steelweak").innerHTML = "Steel";
+        document.getElementById("steelval1").innerHTML = returnedarrays[0]['steel'];
+        document.getElementById("fireweak").innerHTML = "Fire";
+        document.getElementById("fireval1").innerHTML = returnedarrays[0]['fire'];
+        document.getElementById("waterweak").innerHTML = "Water";
+        document.getElementById("waterval1").innerHTML = returnedarrays[0]['water'];
+        document.getElementById("grassweak").innerHTML = "Grass";
+        document.getElementById("grassval1").innerHTML = returnedarrays[0]['grass'];
+        document.getElementById("electricweak").innerHTML = "Electric";
+        document.getElementById("electricval1").innerHTML = returnedarrays[0]['electric'];
+        document.getElementById("psychicweak").innerHTML = "Psychic";
+        document.getElementById("psychicval1").innerHTML = returnedarrays[0]['psychic'];
+        document.getElementById("iceweak").innerHTML = "Ice";
+        document.getElementById("iceval1").innerHTML = returnedarrays[0]['ice'];
+        document.getElementById("dragonweak").innerHTML = "Dragon";
+        document.getElementById("dragonval1").innerHTML = returnedarrays[0]['dragon'];
+        document.getElementById("fairyweak").innerHTML = "Fairy";
+        document.getElementById("fairyval1").innerHTML = returnedarrays[0]['fairy'];
+        document.getElementById("darkweak").innerHTML = "Dark";
+        document.getElementById("darkval1").innerHTML = returnedarrays[0]['dark'];
+        document.getElementById("yourteam").innerHTML = "YOUR TEAM";
+        document.getElementById("StrongAgainst").innerHTML = "Strong Against";
+        document.getElementById("WeakAgainst").innerHTML = "Weak Against";
+        
+        
+
     }
     else if(type=="loadlist"){
        console.log(returnedarrays);    
@@ -201,10 +259,9 @@ window.onload = pokelist;
 <div id='cssmenu'>
 <ul>
    <li><a href='Homepage.php'><span>Pokedex</span></a></li>
-   <li class='active'><a href='plusDatabase.php'><span>+Databse</span></a></li>
-   <li><a href='#'><span>Build your Team</span></a></li>
-   <li><a href='#'><span>Team Suggestion</span></a></li>
-   <li><a href='#'><span>Forums</span></a></li>
+   <li class='active'><a href='Teams.php'><span>Create A Team</span></a></li>
+   <li><a href='TeamBuilder.php'><span>Generate A Team</span></a></li>
+   <li><a href='http://localhost/Forum/index.php'><span>Forum</span></a></li>
    <li class='last'><a href='Homepage.php?Loggedout=true'><span>Logout</span></a></li>
 </ul>
 </div>
@@ -225,6 +282,7 @@ window.onload = pokelist;
         <img id="Poke4pic" src="" height="200" />
         <img id="Poke5pic" src="" height="200" />
     </div>
+    <h2 align="center" id="StrongAgainst"></h2>
     <table align="center">
         <tr>
             <th width="100px" id="normalstrong">
@@ -274,10 +332,10 @@ window.onload = pokelist;
             <td id="rockval" align="center">
                 
             </td>
-            <td id="bugvlval" align="center">
+            <td id="bugval" align="center">
                 
             </td>
-            <td id="ghostlval" align="center">
+            <td id="ghostval" align="center">
                 
             </td>
             <td id="steelval" align="center">
@@ -312,6 +370,154 @@ window.onload = pokelist;
             <th width="100px" id="darkstrong">
                 
             </th>
+        </tr>
+        <tr>
+            <td id="fireval" align="center">
+                
+            </td>
+            <td id="waterval" align="center">
+                
+            </td>
+                <td id="grassval" align="center">
+                
+            </td>
+            <td id="electricval" align="center">
+                
+            </td>
+            <td id="psychicval" align="center">
+                
+            </td>
+            <td id="iceval" align="center">
+                
+            </td>
+            <td id="dragonval" align="center">
+                
+            </td>
+            <td id="fairyval" align="center">
+                
+            </td>
+            <td id="darkval" align="center">
+                
+            </td>
+        </tr>
+    </table>
+ <h2 align="center" id="WeakAgainst"></h2>
+     <table align="center">
+        <tr>
+            <th width="100px" id="normalweak">
+                
+            </th>
+            <th width="100px" id="fightingweak">
+                
+            </th>
+            <th width="100px" id="flyingweak">
+                
+            </th>
+            <th width="100px" id="poisonweak">
+                
+            </th>
+            <th width="100px" id="groundweak">
+                
+            </th>
+            <th width="100px" id="rockweak">
+                
+            </th>
+            <th width="100px" id="bugweak">
+                
+            </th>
+            <th width="100px" id="ghostweak">
+                
+            </th>
+            <th width="100px" id="steelweak">
+                
+            </th>
+        </tr>
+        <tr>
+            <td id="normalval1" align="center">
+                
+            </td>
+            <td id="fightingval1" align="center">
+                
+            </td>
+            <td id="flyingval1" align="center">
+                
+            </td>
+            <td id="poisonval1" align="center">
+                
+            </td>
+            <td id="groundval1" align="center">
+                
+            </td>
+            <td id="rockval1" align="center">
+                
+            </td>
+            <td id="bugval1" align="center">
+                
+            </td>
+            <td id="ghostval1" align="center">
+                
+            </td>
+            <td id="steelval1" align="center">
+                
+            </td>
+        </tr>
+        <tr>
+            <th width="100px" id="fireweak">
+                
+            </th>
+            <th width="100px" id="waterweak">
+                
+            </th>
+            <th width="100px" id="grassweak">
+                
+            </th>
+            <th width="100px" id="electricweak">
+                
+            </th>
+            <th width="100px" id="psychicweak">
+                
+            </th>
+            <th width="100px" id="iceweak">
+                
+            </th>
+            <th width="100px" id="dragonweak">
+                
+            </th>
+            <th width="100px" id="fairyweak">
+                
+            </th>
+            <th width="100px" id="darkweak">
+                
+            </th>
+        </tr>
+        <tr>
+            <td id="fireval1" align="center">
+                
+            </td>
+            <td id="waterval1" align="center">
+                
+            </td>
+                <td id="grassval1" align="center">
+                
+            </td>
+            <td id="electricval1" align="center">
+                
+            </td>
+            <td id="psychicval1" align="center">
+                
+            </td>
+            <td id="iceval1" align="center">
+                
+            </td>
+            <td id="dragonval1" align="center">
+                
+            </td>
+            <td id="fairyval1" align="center">
+                
+            </td>
+            <td id="darkval1" align="center">
+                
+            </td>
         </tr>
     </table>
     <table align="center" border="1" bgcolor="#FFA07A">
